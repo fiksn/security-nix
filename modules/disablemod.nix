@@ -4,6 +4,7 @@ with lib;
 let
   cfg = config.services.disablemod;
   cisRecommendation = [ "freevxfs" "jffs2" "hfs" "hfsplus" "udf" "sctp" "dccp" "rds" "tipc" ];
+  cisNoUsbRecommendation = [ "msdos" "vfat" "fat" ];
 in
 {
   options.services.disablemod = {
@@ -34,11 +35,21 @@ in
       '';
     };
 
+    cisNoUsbRecommendedModules = mkOption {
+      type = types.listOf types.str;
+      readOnly = true;
+      description = ''
+        Read-only list of names of kernel modules that should not be loaded
+        (defaults from CIS benchmark when disabling USB)
+      '';
+    };
+
   };
 
   config = {
     # Always available
     services.disablemod.cisRecommendedModules = cisRecommendation;
+    services.disablemod.cisNoUsbRecommendedModules = cisNoUsbRecommendation;
 
     # Only when cfg.enable == true (some ugly trickery)
     security.lockKernelModules = mkIf cfg.enable (mkOverride false);
@@ -51,6 +62,10 @@ in
           ${
             # Noop - not sure how to else force evaluation, tried builtins.seq, without this readOnly will have no effect
             if length cfg.cisRecommendedModules > 0 then "" else ""
+          }
+          ${
+            # Noop - not sure how to else force evaluation, tried builtins.seq, without this readOnly will have no effect
+            if length cfg.cisNoUsbRecommendedModules > 0 then "" else ""
           }
         '' else "";
   };

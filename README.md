@@ -37,7 +37,6 @@ a particular module to be loaded.
 import = [ ./disablemod.nix ];
 services.disablemod = {
   enable = true;
-  modules = services.disablemod.cisRecommendedModules;
+  modules = with config.services.disablemod; cisRecommendedModules ++ cisNoUsbRecommendedModules;
 };
 ```
-
