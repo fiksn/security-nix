@@ -40,3 +40,19 @@ services.disablemod = {
   modules = with config.services.disablemod; cisRecommendedModules ++ cisNoUsbRecommendedModules;
 };
 ```
+
+## Nginx [Cloudflare](https://www.cloudflare.com/)
+
+This is used to allow traffic just from [Cloudflare](https://www.cloudflare.com/) [IPs](https://www.cloudflare.com/ips/).
+
+### Usage
+
+```
+virtualHosts."demo.local" = {
+      locations."/" = {
+        extraConfig = ''
+          include ${security.lib.nginxCfAllow};
+        ''
+      };
+};
+```
