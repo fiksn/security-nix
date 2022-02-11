@@ -1,21 +1,33 @@
-repos:
-- hooks:
-  - id: trailing-whitespace
-  - id: check-yaml
-    name: Check YAML files
-  repo: git://github.com/pre-commit/pre-commit-hooks
-  rev: v3.2.0
-- hooks:
-  - id: nixpkgs-fmt
-    name: Format .nix files
-  repo: git://github.com/nix-community/nixpkgs-fmt
-  rev: v1.0.0
-- hooks:
-  - args: ["--format=tty", "--shell=bash"]
-    files: ^.envrc$
-    id: shell-lint
-    name: Lint .envrc
-    types: [text]
-  repo: git://github.com/detailyang/pre-commit-shell
-  rev: v1.0.6
+default_stages: [commit]
+fail_fast: true
 
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.0.1
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+      - id: check-merge-conflict
+      - id: detect-aws-credentials
+        args: ['--allow-missing-credentials']
+
+  - repo: local
+    hooks:
+      - id: 'nixpkgs-fmt'
+        name: 'nixpkgs-fmt'
+        description: 'Format nix code with nixpkgs-fmt'
+        entry: 'nixpkgs-fmt'
+        language: 'system'
+        files: '\.nix$'
+        always_run: true
+
+  - repo: git://github.com/detailyang/pre-commit-shell
+    rev: v1.0.6
+    hooks:
+      - id: shell-lint
+        args: ["--format=tty", "--shell=bash"]
+        files: ^.envrc$
+        name: Lint .envrc
+        types: [text]
