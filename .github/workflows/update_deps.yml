@@ -15,7 +15,7 @@ jobs:
           access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
     - name: Update ca-certs
       run: mkdir -p /etc/ssl/certs/ ; ln -s $NIX_SSL_CERT_FILE /etc/ssl/certs/
-    - uses: cachix/cachix-action@v10
+    - uses: cachix/cachix-action@v11
       with:
         name: fiksn
         signingKey: '${{ secrets.CACHIX_KEY }}'
