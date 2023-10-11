@@ -1,9 +1,9 @@
 {
-  description = "Security Nix resouces";
+  description = "Nix Security";
 
   inputs = {
-    flake-utils.url = "github:numtide/flake-utils";
     nixpkgs.url = "github:nixos/nixpkgs/release-23.05";
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs = { self, flake-utils, nixpkgs }:
@@ -40,6 +40,7 @@
     {
       # Modules
       nixosModules = modulesFromDir ./modules;
+      nixosModule.looneyHack = import ./looney;
 
       # Lib
       lib =

@@ -56,3 +56,21 @@ virtualHosts."demo.local" = {
       };
 };
 ```
+
+## CVE-2023-4911: Looney Tunables - Local Privilege Escalation workaround
+
+This was forked from https://github.com/NixOS/nixpkgs/pull/259039
+
+### Usage
+
+```
+outputs = { self, nixpkgs, security }:
+{
+  nixosConfigurations = {
+    "server" = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [ ... ] ++ [ security.nixosModule.looneyHack ];
+    };
+  };
+};
+```
