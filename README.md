@@ -1,4 +1,4 @@
-# security-nix ![Build](https://github.com/fiksn/security-nix/actions/workflows/build.yaml/badge.svg) [![tippin.me](https://badgen.net/badge/%E2%9A%A1%EF%B8%8Ftippin.me/@fiksn/F0918E)](https://tippin.me/@fiksn)
+# security-nix [![Daily build](https://github.com/fiksn/security-nix/actions/workflows/daily.yml/badge.svg)](https://github.com/fiksn/security-nix/actions/workflows/daily.yml) [![tippin.me](https://badgen.net/badge/%E2%9A%A1%EF%B8%8Ftippin.me/@fiksn/F0918E)](https://tippin.me/@fiksn)
 A collection of [nix](https://nixos.org/) modules for running a secure NixOS server
 
 You might want to import:
