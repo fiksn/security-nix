@@ -51,7 +51,7 @@ This is used to allow traffic just from [Cloudflare](https://www.cloudflare.com/
 virtualHosts."demo.local" = {
       locations."/" = {
         extraConfig = ''
-          include ${security.lib.nginxCfAllow};
+          include ${security.lib.nginxCfAllow pkgs};
         ''
       };
 };
