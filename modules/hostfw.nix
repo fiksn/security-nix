@@ -22,13 +22,7 @@ let
 in
 {
   options.services.hostfw = {
-    enable = mkEnableOption {
-      type = types.bool;
-      default = false;
-      description = ''
-        Enable host firewall
-      '';
-    };
+    enable = mkEnableOption "host firewall";
 
     tcpPortAllowIpList = mkOption {
       default = null;

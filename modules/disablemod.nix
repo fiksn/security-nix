@@ -8,13 +8,7 @@ let
 in
 {
   options.services.disablemod = {
-    enable = mkEnableOption {
-      type = types.bool;
-      default = false;
-      description = ''
-        Enable disablemod
-      '';
-    };
+    enable = mkEnableOption "disablemod";
 
     modules = mkOption {
       type = types.listOf types.str;
@@ -51,8 +45,8 @@ in
     services.disablemod.cisRecommendedModules = cisRecommendation;
     services.disablemod.cisNoUsbRecommendedModules = cisNoUsbRecommendation;
 
-    # Only when cfg.enable == true (some ugly trickery)
-    security.lockKernelModules = mkIf cfg.enable (mkOverride false);
+    # Only when cfg.enable == true
+    security.lockKernelModules = mkIf cfg.enable true;
     environment.etc."modprobe.d/disablemod.conf".text =
       if cfg.enable then
         ''
